@@ -4,11 +4,16 @@ class Message {
 
     private ?int $id;
     private string $content;
+    private int $roomId;
+    private int $userId;
+    
 
-    public function __construct(string $content)
+    public function __construct(string $content, int $roomId, int $userId)
     {
         $this->id = null;
         $this->content = $content;
+        $this->roomId = $roomId;
+        $this->userId = $userId;
     }
 
     // public getter
