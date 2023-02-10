@@ -1,0 +1,64 @@
+﻿Distorsion
+- assets
+        - images
+        - js
+        - styles
+                - css
+                - scss
+
+
+- services
+- Router.php
+
+
+- controllers
+        -AbstractController.php
+        -UserController.php
+-MessageControllet.php
+-CategoriesController.php
+-RoomController.php
+
+
+- managers
+        - AbstractManager.php
+        - UserManager.php
+- MessageManager.php
+- CategoryManager.php
+- RoomManager.php
+
+
+- models
+        - User.php
+        - Message.php
+        - Category.php
+        - Room.php
+
+
+- views
+- index.phtml (page d’accueil)
+        - register.phtml (form)
+        - create-category.phtml (form)
+        - create-room.phtml (form)
+        - login.phtml (form)
+        - layout.phtml 
+- header.phtml
+- footer.phtml
+- aside.phtml
+
+
+- index.php
+
+
+
+
+
+
+
+
+
+
+function : 
+        -getMessage()
+        -getUserId()
+        -getRoom()
+        -getCategory()
