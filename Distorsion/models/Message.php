@@ -25,6 +25,14 @@ class Message {
     {
         return $this->content;
     }
+    public function getRoomId() : int
+    {
+        return $this->roomId;
+    }
+    public function getUserId() : int
+    {
+        return $this->userId;
+    }
 
     // public setter
     public function setId(int $id) : void
@@ -34,6 +42,14 @@ class Message {
     public function setContent(string $content) : void
     {
         $this->content = $content;
+    }
+    public function setRoomId(string $roomId) : void
+    {
+        $this->roomId = $roomId;
+    }
+    public function setUserId(string $userId) : void
+    {
+        $this->userId = $userId;
     }
 }
 
