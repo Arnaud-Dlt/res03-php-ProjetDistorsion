@@ -1,9 +1,9 @@
 <?php
 
 require "controllers/UserController.php";
-require "controllers/MessageController.php";
-require "controllers/CategoryController.php";
-require "controllers/RoomController.php";
+// require "controllers/MessageController.php";
+// require "controllers/CategoryController.php";
+// require "controllers/RoomController.php";
 
 class Router {
     

@@ -13,7 +13,7 @@ class UserController extends AbstractController{
     
     public function index()
     {
-       
+       $this->render("accueil", []);
     }
     
     public function register(array $user)
