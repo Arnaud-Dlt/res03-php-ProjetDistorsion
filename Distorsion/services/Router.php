@@ -1,38 +1,32 @@
 <?php
 
-require "controllers/UserController.php";
-// require "controllers/MessageController.php";
-// require "controllers/CategoryController.php";
-// require "controllers/RoomController.php";
+require "controllers/DisplayController.php";
 
 class Router {
     
-    private UserController $UserControl;
-    private MessageController $MessageController;
-    private CategoryController $CategoryController;
-    private RoomController $RoomController;
+    private DisplayController $displayController;
 
     public function __construct()
     {
-        $this->UserController = new UserController();
-        // $this->MessageController = new MessageController();
-        // $this->CategoryController = new CategoryController();
-        // $this->RoomController = new RoomController();
+        $this->displayController = new DisplayController();
     }
     
     function checkRoute(string $route) : void 
     {
-        if ($route === "creation-compte"){
-            $this->UserController->register();
+        if ($route === "accueil"){
+            $this->displayController->index();
+        }
+        if ($route === "créer-compte"){
+            $this->displayController->index();
         }
         if ($route === "connexion"){
-            $this->UserController->login();
+            $this->displayController->index();
         }
         if ($route === "bienvenu"){
-            $this->UserController->welcome();
-            $this->CategoryController->categoriesDisplay();
-            $this->RoomController->roomsDisplay();
+            $this->displayController->index();
         }
+
+
         if ($route === "discussion"){
             $this->UserController->discussionDisplay();
             // $this->CategoryController->categoriesDisplay();
