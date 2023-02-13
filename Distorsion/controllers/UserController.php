@@ -57,7 +57,7 @@ class UserController extends AbstractController{
         
         $users=$this->manager->saveUser($newUser);
         
-        $this->render("register", ["users"=>$users]);
+        $this->render("bienvenu", ["users"=>$users]);
     }
     
     public function editUser(array $newUser)
