@@ -4,11 +4,16 @@ class Message {
 
     private ?int $id;
     private string $content;
+    private int $roomId;
+    private int $userId;
+    
 
-    public function __construct(string $content)
+    public function __construct(string $content, int $roomId, int $userId)
     {
         $this->id = null;
         $this->content = $content;
+        $this->roomId = $roomId;
+        $this->userId = $userId;
     }
 
     // public getter
@@ -20,6 +25,14 @@ class Message {
     {
         return $this->content;
     }
+    public function getRoomId() : int
+    {
+        return $this->roomId;
+    }
+    public function getUserId() : int
+    {
+        return $this->userId;
+    }
 
     // public setter
     public function setId(int $id) : void
@@ -29,6 +42,14 @@ class Message {
     public function setContent(string $content) : void
     {
         $this->content = $content;
+    }
+    public function setRoomId(string $roomId) : void
+    {
+        $this->roomId = $roomId;
+    }
+    public function setUserId(string $userId) : void
+    {
+        $this->userId = $userId;
     }
 }
 
