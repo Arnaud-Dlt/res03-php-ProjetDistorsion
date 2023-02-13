@@ -38,7 +38,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
         $insertUser = $query->fetch(PDO::FETCH_ASSOC);
         
-        $newUser = new User ($insertUser["username"], $insertUser["email"], $insertUser["password"]);
+        $newUser = new User($insertUser["username"], $insertUser["email"], $insertUser["password"]);
         $newUser->setId($insertUser["id"]);
         
         return $newUser;
