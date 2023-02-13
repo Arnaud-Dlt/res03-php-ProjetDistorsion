@@ -5,7 +5,7 @@ require "models/User.php";
 
 class UserManager extends AbstractManager{
     
-    public function savetUser(User $user) : User{
+    public function saveUser(User $user) : User{
         
         $query = $db->prepare('INSERT INTO users VALUES (null, :value1, :value2, :value3)');
         $parameters = [

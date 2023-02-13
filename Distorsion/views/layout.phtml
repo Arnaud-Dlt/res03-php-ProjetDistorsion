@@ -23,19 +23,20 @@
     
     <!--HEADER-->
     <?php 
-        require 'partials/_header.phtml'
+        require 'partials/_header.phtml';
     ?>
     
     
     <!--MAIN-->
     <?php 
-        require "views/templates/".$template.".phtml"
+        require "partials/_aside.phtml";
+        require "views/templates/".$template.".phtml";
     ?>
     
     
     <!--FOOTER-->
     <?php 
-        require 'partials/_footer.phtml'
+        require 'partials/_footer.phtml';
     ?>
     <script type="module" src="assets/js/index.js"></script>
 </body>
