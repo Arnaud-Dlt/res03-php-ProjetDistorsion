@@ -18,27 +18,30 @@ class UserController extends AbstractController{
     
     public function registerDisplay()
     {
-        var_dump($_POST);
         if (isset($_POST["registerUsername"])){
-            echo "Je suis dans le if";
             $this->register();
             $this->render("welcome", []);
         }
         else{
-            echo "Je suis dans le else";
             $this->render("register", []);
         }
     }
     
     public function loginDisplay()
     {
-        $this->render("login", []);
+        if (isset($_POST["loginEmail"])){
+            echo "Je suis dans le if";
+            $this->login();
+            $this->render("welcome", []);
+        }
+        else{
+            echo "Je suis dans le else";
+            $this->render("login", []);
+        }
     }
 
     public function welcomeDisplay()
     {
-                $this->register();
-
         $this->render("welcome", []);
     }
 
@@ -82,8 +85,8 @@ class UserController extends AbstractController{
         {
             $logEmail=$_POST["loginEmail"];
             $pwd=$_POST["loginPassword"];
-            $userToConnect=loadUser($logEmail);
-    
+            $userToConnect=$this->userManager->loadUser($logEmail);
+            var_dump($userToConnect);
             if(password_verify($pwd, $userToConnect->getPassword()))
             {
                 echo "Bienvenue";
@@ -97,8 +100,6 @@ class UserController extends AbstractController{
             }
         }
     }
-    
-    
 }
 
 
