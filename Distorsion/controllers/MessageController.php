@@ -3,7 +3,7 @@ require 'controllers/AbstractController.php';
 require 'managers/MessageManager.php';
 
 class MessageController extends AbstractController{
-    private MessageManager $manager;
+    private MessageManager $messageManager;
     
     public function __construct()
     {
@@ -19,12 +19,12 @@ class MessageController extends AbstractController{
     
     public function createMessage(array $message)
     {
-        $message = new Message($message['content']);
-        $messages=$this->manager->insertMessage($message);
+        $newMessage = new Message($message['content']);
+        $messages=$this->manager->insertMessage($newMessage);
         $this->render("create", ["messages"=>$messages]);
     }
     
-    public function editMessage(array $post)
+    public function editMessage(array $message)
     {
         
     }

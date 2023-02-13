@@ -3,7 +3,7 @@ require 'controllers/AbstractController.php';
 require 'managers/RoomManager.php';
 
 class RoomController extends AbstractController{
-    private RoomManager $manager;
+    private RoomManager $roomManager;
     
     public function __construct()
     {
@@ -13,18 +13,21 @@ class RoomController extends AbstractController{
     
     public function index()
     {
-        $users=$this->manager->getAllRoom();
-        $this->render("index", ["users"=>$users]);
+        $rooms=$this->manager->getAllRoom();
+        
+        $this->render("index", ["rooms"=>$rooms]);
     }
     
-    public function create(array $post)
+    public function createRoom(array $room)
     {
-        $user = new Room($post['email'], $post['username'], $post['password']);
-        $users=$this->manager->insertRoom($user);
+        $newRoom = new Room($room['email'], $room['username'], $room['password']);
+        
+        $users=$this->manager->insertRoom($newRoom);
+        
         $this->render("create", ["users"=>$users]);
     }
     
-    public function edit(array $post)
+    public function editRoom(array $room)
     {
         
     }
