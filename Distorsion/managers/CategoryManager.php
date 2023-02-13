@@ -11,7 +11,7 @@ class CategoryManager extends AbstractManager{
     
         $query->execute();
     
-        $loadedCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+        $getAllCategories = $query->fetchAll(PDO::FETCH_ASSOC);
     
         $tabCategories=[];
         
@@ -24,20 +24,14 @@ class CategoryManager extends AbstractManager{
         return $tabCategories;
     }
     
-    public function saveCategory(Category $category) : Category
-    {
-        $query = $db->prepare('INSERT INTO categories VALUES (null, :value1, :value2)');
-        
-        $parameters = ['value1' => $category->getName(), 'value2' =>$categories];
-        
+    public function saveCategory(Category $Category) : ? Category{
+        $query = $this->db->prepare('INSERT INTO categories VALUES (null, :value1, :value2)');
+        $parameters = [
+        'value1' => $category->getName(),
+        'value2' => $category->getDescription()
+        ];
         $query->execute($parameters);
-        
-        $insertCategory = $query->fetch(PDO::FETCH_ASSOC);
-        
-        $newCategory = new Category ($insertCategory["name"], $insertCategory["description"]);
-        
-        $newCategory->setId($insertCategory["id"]);
-        
-        return $newCategory;
+
+        return $this->loadCategory($category->getEmail());
     }
 ?>
