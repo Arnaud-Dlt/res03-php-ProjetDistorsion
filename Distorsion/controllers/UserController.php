@@ -46,9 +46,9 @@ class UserController extends AbstractController{
         if(isset($_POST["registerUsername"]) && !empty($_POST["registerUsername"])
         && isset($_POST["registerEmail"]) && !empty($_POST["registerEmail"])
         && isset($_POST["registerPassword"]) && !empty($_POST["registerPassword"])
-        && isset($_POST["confirm-password"]) && !empty($_POST["confirm-password"])){
+        && isset($_POST["confirmPassword"]) && !empty($_POST["confirmPassword"])){
             
-            if($_POST["registerPassword"] === $_POST["confirm-password"]){
+            if($_POST["registerPassword"] === $_POST["confirmPassword"]){
                 $hashPwd=password_hash($_POST["registerPassword"], PASSWORD_DEFAULT);
                 $newUser=new User($_POST['registerUsername'],$_POST['registerEmail'], $hashPwd);
                 $this->userManager->saveUser($newUser);
@@ -61,11 +61,17 @@ class UserController extends AbstractController{
             // }
         }   
         
-        else if(isset($_POST['username']) && empty($_POST['username'])){
+        else if(isset($_POST['registerUsername']) && empty($_POST['registerUsername'])){
             echo "Veuillez saisir un Pseudo";
         }
         else if(isset($_POST['registerEmail']) && empty($_POST['registerEmail'])){
             echo "Veuillez saisir un Email";
+        }
+        else if(isset($_POST['registerPassword']) && empty($_POST['registerPassword'])){
+            echo "Veuillez saisir un mot de passe";
+        }
+        else if(isset($_POST['confirmPassword']) && empty($_POST['confirmPassword'])){
+            echo "Veuillez confirmer votre mot de passe";
         }
         // $users=$this->manager->saveUser($newUser);
     }
