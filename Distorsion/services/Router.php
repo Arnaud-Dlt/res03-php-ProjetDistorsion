@@ -35,14 +35,14 @@ class Router {
         }
         if ($route === "discussion"){
             $this->UserController->discussionDisplay();
-            $this->CategoryController->categoriesDisplay();
-            $this->RoomController->roomsDisplay();
+            // $this->CategoryController->categoriesDisplay();
+            // $this->RoomController->roomsDisplay();
         }
         else if ($route === "creation-categorie"){
-            $this->CategotyController->create();
+            $this->CategotyController->createCategory();
         }
         else if ($route === "creation-salle"){
-            $this->RoomController->edit();
+            $this->RoomController->createRoom();
         }
         else{
             $this->UserControl->index();
