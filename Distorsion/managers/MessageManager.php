@@ -11,30 +11,24 @@ class MessageManager extends AbstractManager{
     
         $query->execute();
     
-        $loadedmessages = $query->fetchAll(PDO::FETCH_ASSOC);
+        $getAllMessage = $query->fetchAll(PDO::FETCH_ASSOC);
     
-        $tabmessages=[];
+        $tabmessage=[];
         
-        foreach($getAllmessages as $message)
+        foreach($getAllMessage as $message)
         {
             $newMessage=new Message($message["content"]);
             
-            array_push($tabMessages, $newMessage);
+            array_push($tabmessage, $newMessage);
         }
-        
-        return $tabMessages;
+        return $tabmessage;
     }
     
-    public function saveMessage(Message $message) : Message{
-        
-        $query = $db->prepare('INSERT INTO messages VALUES (null, :value1)');
+    public function saveMessage(Message $message) : ? Message{
+        $query = $this->db->prepare('INSERT INTO messages VALUES (null, :value1)');
         $parameters = ['value1' => $message->getContent()];
         $query->execute($parameters);
-        $insertMessage = $query->fetch(PDO::FETCH_ASSOC);
-        
-        $newMessage = new Message ($insertMessage["content"]);
-        $newMessage->setId($insertMessage["id"]);
-        
-        return $newMessage;
+
+        return $this->loadMessage($message->getContent());
     }
 ?>
