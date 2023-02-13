@@ -31,6 +31,7 @@ class UserController extends AbstractController{
             $newUser=new User($_POST['username'],$_POST['registerEmail'], $hashPwd);
         
             saveUser($newUser);
+            $this->render("bienvenu", []);
             }
     
             else 
