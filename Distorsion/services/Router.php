@@ -1,45 +1,54 @@
 <?php
 
-require "controllers/DisplayController.php";
+require "controllers/UserController.php";
+// require "controllers/MessageController.php";
+// require "controllers/CategoryController.php";
+// require "controllers/RoomController.php";
 
 class Router {
     
-    private DisplayController $displayController;
+    private UserController $userControl;
+    // private MessageController $MessageController;
+    // private CategoryController $CategoryController;
+    // private RoomController $RoomController;
 
     public function __construct()
     {
-        $this->displayController = new DisplayController();
+        $this->userController = new UserController();
+        // $this->MessageController = new MessageController();
+        // $this->CategoryController = new CategoryController();
+        // $this->RoomController = new RoomController();
     }
     
     function checkRoute(string $route) : void 
     {
         if ($route === "accueil"){
-            $this->displayController->index();
+            $this->userController->indexDisplay();
         }
-        if ($route === "créer-compte"){
-            $this->displayController->index();
+        else if ($route === "créer-compte"){
+            $this->userController->registerDisplay();
         }
-        if ($route === "connexion"){
-            $this->displayController->index();
+        else if ($route === "connexion"){
+            $this->userController->loginDisplay();
         }
-        if ($route === "bienvenu"){
-            $this->displayController->index();
+        else if ($route === "bienvenu"){
+            $this->userController->welcomeDisplay();
         }
 
 
-        if ($route === "discussion"){
-            $this->UserController->discussionDisplay();
-            // $this->CategoryController->categoriesDisplay();
-            // $this->RoomController->roomsDisplay();
-        }
-        else if ($route === "creation-categorie"){
-            $this->CategotyController->createCategory();
-        }
-        else if ($route === "creation-salle"){
-            $this->RoomController->createRoom();
-        }
+        // if ($route === "discussion"){
+        //     $this->userController->discussionDisplay();
+        //     // $this->CategoryController->categoriesDisplay();
+        //     // $this->RoomController->roomsDisplay();
+        // }
+        // else if ($route === "creation-categorie"){
+        //     $this->uategotyController->createCategory();
+        // }
+        // else if ($route === "creation-salle"){
+        //     $this->roomController->createRoom();
+        // }
         else{
-            $this->UserController->index();
+            $this->userController->indexDisplay();
         }
     }
 }
