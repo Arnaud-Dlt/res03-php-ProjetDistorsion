@@ -1,9 +1,9 @@
 <?php
 
 require "controllers/UserController.php";
-require "controllers/MessageController.php";
-require "controllers/CategoryController.php";
-require "controllers/RoomController.php";
+// require "controllers/MessageController.php";
+// require "controllers/CategoryController.php";
+// require "controllers/RoomController.php";
 
 class Router {
     
@@ -15,9 +15,9 @@ class Router {
     public function __construct()
     {
         $this->UserController = new UserController();
-        $this->MessageController = new MessageController();
-        $this->CategoryController = new CategoryController();
-        $this->RoomController = new RoomController();
+        // $this->MessageController = new MessageController();
+        // $this->CategoryController = new CategoryController();
+        // $this->RoomController = new RoomController();
     }
     
     function checkRoute(string $route) : void 
@@ -45,7 +45,7 @@ class Router {
             $this->RoomController->createRoom();
         }
         else{
-            $this->UserControl->index();
+            $this->UserController->index();
         }
     }
 }

@@ -4,7 +4,7 @@ abstract class AbstractManager {
     
     protected PDO $db;
 
-    public function __construct(string $host, string $port, string $dbName, string $username, string $password)
+    public function __construct(string $dbName, string $port, string $host, string $username, string $password)
     {
 
         $this->db = new PDO(

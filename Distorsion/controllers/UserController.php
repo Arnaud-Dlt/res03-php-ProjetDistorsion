@@ -13,22 +13,22 @@ class UserController extends AbstractController{
     
     public function index()
     {
-       
+       $this->render("accueil", []);
     }
     
     public function register(array $user)
     {
         if(isset($_POST["username"]) && !empty($_POST["username"])
-        && isset($_POST["email"]) && !empty($_POST["email"])
-        && isset($_POST["password"]) && !empty($_POST["password"])
+        && isset($_POST["registerEmail"]) && !empty($_POST["registerEmail"])
+        && isset($_POST["registerPassword"]) && !empty($_POST["registerPassword"])
         && isset($_POST["confirm-password"]) && !empty($_POST["confirm-password"]))
         {
-            if($_POST["passwordRegister"] === $_POST["confirm-password"])
+            if($_POST["registerPassword"] === $_POST["confirm-password"])
             {
         
-            $hashPwd=password_hash($_POST["passwordRegister"], PASSWORD_DEFAULT);
+            $hashPwd=password_hash($_POST["registerPassword"], PASSWORD_DEFAULT);
         
-            $newUser=new User($_POST['username'],$_POST['email'], $hashPwd);
+            $newUser=new User($_POST['username'],$_POST['registerEmail'], $hashPwd);
         
             saveUser($newUser);
             }
@@ -38,7 +38,7 @@ class UserController extends AbstractController{
                 echo "Les mots de passe sont différents !";
             }
     
-            if(loadUser($_POST['emailRegister']===null))
+            if(loadUser($_POST['registerEmail']===null))
             {
                 echo "Email déjà utilisé";
             }
@@ -47,16 +47,16 @@ class UserController extends AbstractController{
         
         else if(isset($_POST['username']) && empty($_POST['username']))
         {
-            echo "Veuillez saisir un Prenom";
+            echo "Veuillez saisir un Pseudo";
         }
-        else if(isset($_POST['email']) && empty($_POST['email']))
+        else if(isset($_POST['registerEmail']) && empty($_POST['registerEmail']))
         {
             echo "Veuillez saisir un Email";
         }
         
         $users=$this->manager->saveUser($newUser);
         
-        $this->render("create", ["users"=>$users]);
+        $this->render("register", ["users"=>$users]);
     }
     
     public function editUser(array $newUser)
@@ -66,10 +66,10 @@ class UserController extends AbstractController{
     
     function login()
     {
-        if(isset($_POST['email'])&& !empty($_POST["email"]) && isset($_POST['password']) && !empty($_POST["password"]))
+        if(isset($_POST['loginEmail'])&& !empty($_POST["loginEmail"]) && isset($_POST['loginPassword']) && !empty($_POST["loginPassword"]))
         {
-            $logEmail=$_POST["email"];
-            $pwd=$_POST["password"];
+            $logEmail=$_POST["loginEmail"];
+            $pwd=$_POST["loginPassword"];
             $userToConnect=loadUser($logEmail);
     
             if(password_verify($pwd, $userToConnect->getPassword()))
