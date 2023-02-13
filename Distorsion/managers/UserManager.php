@@ -5,6 +5,27 @@ require "models/User.php";
 
 class UserManager extends AbstractManager{
     
+        function loadUser(string $email): ? User { 
+    
+        $query=$db->prepare("SELECT * FROM users WHERE email= :email");
+    
+        $parameters=['email' => $email];
+    
+        $query->execute($parameters);
+    
+        $loadedUser = $query->fetch(PDO::FETCH_ASSOC);
+    
+        if($loadedUser===false){
+            return null;
+        }
+    
+        $newUser=new User($loadedUser["username"],$loadedUser["email"], $loadedUser["password"]);
+    
+        $newUser->setId($loadedUser["id"]);
+    
+        return $newUser;
+    }
+    
     public function saveUser(User $user) : User{
         
         $query = $db->prepare('INSERT INTO users VALUES (null, :value1, :value2, :value3)');
