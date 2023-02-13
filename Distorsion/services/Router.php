@@ -34,19 +34,6 @@ class Router {
         else if ($route === "bienvenu"){
             $this->userController->welcomeDisplay();
         }
-
-
-        // if ($route === "discussion"){
-        //     $this->userController->discussionDisplay();
-        //     // $this->CategoryController->categoriesDisplay();
-        //     // $this->RoomController->roomsDisplay();
-        // }
-        // else if ($route === "creation-categorie"){
-        //     $this->uategotyController->createCategory();
-        // }
-        // else if ($route === "creation-salle"){
-        //     $this->roomController->createRoom();
-        // }
         else{
             $this->userController->indexDisplay();
         }

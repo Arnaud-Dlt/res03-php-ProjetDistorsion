@@ -29,7 +29,7 @@ class UserManager extends AbstractManager{
     
     public function saveUser(User $user) : User{
         
-        $query = $db->prepare('INSERT INTO users VALUES (null, :value1, :value2, :value3)');
+        $query = $this->db->prepare('INSERT INTO users VALUES (null, :value1, :value2, :value3)');
         $parameters = [
         'value1' => $user->getUsername(),
         'value2' => $user->getEmail(),
@@ -38,7 +38,7 @@ class UserManager extends AbstractManager{
         $query->execute($parameters);
         $insertUser = $query->fetch(PDO::FETCH_ASSOC);
         
-        $newUser = new User ($insertUser["username"], $insertUser["email"], $insertUser["password"]);
+        $newUser = new User($insertUser["username"], $insertUser["email"], $insertUser["password"]);
         $newUser->setId($insertUser["id"]);
         
         return $newUser;
