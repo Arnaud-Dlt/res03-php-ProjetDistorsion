@@ -5,7 +5,8 @@ require "models/User.php";
 
 class UserManager extends AbstractManager{
     
-        function loadUser(string $email): ? User { 
+        function loadUser(string $email): ? User 
+        { 
     
         $query=$db->prepare("SELECT * FROM users WHERE email= :email");
     

@@ -2,12 +2,12 @@
 
 class Room {
 
-    private ?int $id;
+    private ? int $id;
     private string $name;
     private string $description;
-    private string $categoryId;
+    private int $categoryId;
 
-    public function __construct(string $name, string $description, string $categoryId)
+    public function __construct(string $name, string $description)
     {
         $this->id = null;
         $this->name = $name;
