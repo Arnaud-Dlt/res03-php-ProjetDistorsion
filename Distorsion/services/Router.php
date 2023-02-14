@@ -3,21 +3,21 @@
 require "controllers/UserController.php";
 // require "controllers/MessageController.php";
 require "controllers/CategoryController.php";
-// require "controllers/RoomController.php";
+require "controllers/RoomController.php";
 
 class Router {
     
     private UserController $userControl;
     // private MessageController $messageController;
     private CategoryController $categoryController;
-    // private RoomController $roomController;
+    private RoomController $roomController;
 
     public function __construct()
     {
         $this->userController = new UserController();
         // $this->messageController = new MessageController();
         $this->categoryController = new CategoryController();
-        // $this->roomController = new RoomController();
+        $this->roomController = new RoomController();
     }
     
     function checkRoute(string $route) : void 
@@ -38,7 +38,7 @@ class Router {
             $this->categoryController->createCatDisplay($_POST);
         }
         else if ($route === "créer-salon"){
-            $this->userController->createRoomDisplay();
+            $this->roomController->createRoomDisplay($_POST);
         }
         else{
             $this->userController->indexDisplay();

@@ -1,5 +1,5 @@
 <?php
-require 'controllers/AbstractController.php';
+// require 'controllers/AbstractController.php';
 require 'managers/RoomManager.php';
 
 class RoomController extends AbstractController{
@@ -7,29 +7,34 @@ class RoomController extends AbstractController{
     
     public function __construct()
     {
-        $this->manager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $this->roomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
     }
     
-    
-    public function index()
+    public function createRoomDisplay(array $post)
     {
-        $rooms=$this->manager->getAllRoom();
-        
-        $this->render("index", ["rooms"=>$rooms]);
+        if(isset($post['roomName'])){
+            $this->createRoom($post);
+            echo "room creer";
+        }
+        $this->render("create-room", []);
     }
     
-    public function createRoom(array $room)
+    public function createRoom($post)
     {
-        $newRoom = new Room($room['email'], $room['username'], $room['password']);
+        if(isset($post["roomName"]) && !empty($post["roomName"])
+        && isset($post["roomDescription"]) && !empty($post["roomDescription"])
+        && isset($post["categoryId"]) && !empty($post["categoryId"]))
+        {
+            $newRoom=new Room($post['roomName'], $post['roomDescription'], $post['categoryId']);
+            $this->roomManager->saveRoom($newRoom);
+        }   
         
-        $users=$this->manager->insertRoom($newRoom);
-        
-        $this->render("create", ["users"=>$users]);
-    }
-    
-    public function editRoom(array $room)
-    {
-        
+        else if(isset($post['roomName']) && empty($post['roomName'])){
+            echo "Veuillez saisir un nom de salon";
+        }
+        else if(isset($post['roomDescription']) && empty($post['roomDescription'])){
+            echo "Veuillez saisir une description";
+        }
     }
 }
 

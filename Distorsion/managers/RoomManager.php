@@ -1,6 +1,6 @@
 <?php
 
-require "managers/AbstractManager.php";
+// require "managers/AbstractManager.php";
 require "models/Room.php";
 
 class RoomManager extends AbstractManager{
@@ -24,15 +24,16 @@ class RoomManager extends AbstractManager{
         return $tabRooms;
     }
     
-    public function saveRoom(Room $room) : ? Room{
-        $query = $this->db->prepare('INSERT INTO rooms VALUES (null, :value1, :value2)');
+    public function saveRoom(Room $room) :void
+    {
+        $query = $this->db->prepare('INSERT INTO rooms VALUES (null, :value1, :value2, :value3)');
         $parameters = [
         'value1' => $room->getName(),
-        'value2' => $room->getDescription()
+        'value2' => $room->getDescription(),
+        'value3' => $room->getCategoryId()
         ];
         $query->execute($parameters);
-
-        return $this->loadRoom($room->getEmail());
     }
+}
     
 ?>

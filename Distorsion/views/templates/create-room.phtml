@@ -1,6 +1,7 @@
 <section>
     <h2>Créer un salon</h2>
     <form action="index.php?route=créer-salon" method="POST">
+        
         <fieldset>
         <label>Nom du salon : </label>
         <input type="text" name="roomName">
@@ -9,6 +10,11 @@
         <fieldset>
         <label>Description : </label>
         <input type="text" name="roomDescription">
+        </fieldset>
+        
+        <fieldset>
+        <label>Categorie Id : </label>
+        <input type="number" name="categoryId">
         </fieldset>
         
         <input type="submit" name="create-room">
