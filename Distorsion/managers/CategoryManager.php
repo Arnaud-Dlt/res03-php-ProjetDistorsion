@@ -6,20 +6,16 @@ require "models/Category.php";
 class CategoryManager extends AbstractManager
 {
     
-    function loadAllCategory($category): array 
+    function loadAllCategory(): array 
     { 
-        $query=$db->prepare("SELECT * FROM categories");
-    
+        $query=$this->db->prepare("SELECT * FROM categories");
         $query->execute();
-    
         $getAllCategories = $query->fetchAll(PDO::FETCH_ASSOC);
     
         $tabCategories=[];
-        
         foreach($getAllCategories as $category)
         {
             $newCategory=new Category($category["name"],$category["description"]);
-            
             array_push($tabCategories, $newCategory);
         }
         return $tabCategories;
