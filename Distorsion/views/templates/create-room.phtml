@@ -13,8 +13,14 @@
         </fieldset>
         
         <fieldset>
-        <label>Categorie Id : </label>
-        <input type="number" name="categoryId">
+        <label>Categorie : </label>
+        <select name="categoryId">
+            <option>-Choisissez la catégorie-</option>
+            <?php 
+            foreach($tabCategories as $category){ ?>
+            <option><?php $category->getId()." ".$category->getName()?></option>
+            <?php } ?>
+        </select>
         </fieldset>
         
         <input type="submit" name="create-room">
