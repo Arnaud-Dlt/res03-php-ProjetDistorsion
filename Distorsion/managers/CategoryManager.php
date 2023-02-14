@@ -3,7 +3,8 @@
 require "managers/AbstractManager.php";
 require "models/Category.php";
 
-class CategoryManager extends AbstractManager{
+class CategoryManager extends AbstractManager
+{
     
     function loadAllCategory($category): array 
     { 
@@ -24,7 +25,8 @@ class CategoryManager extends AbstractManager{
         return $tabCategories;
     }
     
-    public function saveCategory(Category $Category) : ? Category{
+    public function saveCategory(Category $category) : ? Category
+    {
         $query = $this->db->prepare('INSERT INTO categories VALUES (null, :value1, :value2)');
         $parameters = [
         'value1' => $category->getName(),
@@ -32,6 +34,8 @@ class CategoryManager extends AbstractManager{
         ];
         $query->execute($parameters);
 
-        return $this->loadCategory($category->getEmail());
+        return $this->loadCategory($category->getName());
+        
     }
+}
 ?>
