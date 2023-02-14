@@ -1,0 +1,16 @@
+header{
+    height: 10vh;
+    width: 100vw;
+    background-color: blue;
+    > ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        > li{
+            > a{
+            color: black;
+            text-decoration: none;
+            }
+        }
+    }
+}
