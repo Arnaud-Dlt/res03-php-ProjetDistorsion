@@ -26,7 +26,7 @@ class Router {
             $this->userController->indexDisplay();
         }
         else if ($route === "créer-compte"){
-            $this->userController->registerDisplay();
+            $this->userController->registerDisplay($_POST);
         }
         else if ($route === "connexion"){
             $this->userController->loginDisplay($_POST);

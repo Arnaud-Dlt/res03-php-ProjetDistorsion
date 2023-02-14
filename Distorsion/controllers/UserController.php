@@ -16,10 +16,11 @@ class UserController extends AbstractController{
         $this->render("home", []);
     }
     
-    public function registerDisplay()
+    public function registerDisplay(array $post)
     {
-        if (isset($_POST["registerUsername"])){
-            $this->register();
+        echo "coucou";
+        if (isset($post["registerUsername"])){
+            $this->register($post);
             $this->render("welcome", []);
         }
         else{
@@ -49,37 +50,33 @@ class UserController extends AbstractController{
     }
 
     private function register(){
-        if(isset($_POST["registerUsername"]) && !empty($_POST["registerUsername"])
-        && isset($_POST["registerEmail"]) && !empty($_POST["registerEmail"])
-        && isset($_POST["registerPassword"]) && !empty($_POST["registerPassword"])
-        && isset($_POST["confirmPassword"]) && !empty($_POST["confirmPassword"])){
+        if(isset($post["registerUsername"]) && !empty($post["registerUsername"])
+        && isset($post["registerEmail"]) && !empty($post["registerEmail"])
+        && isset($post["registerPassword"]) && !empty($post["registerPassword"])
+        && isset($post["confirmPassword"]) && !empty($post["confirmPassword"])){
             
-            if($_POST["registerPassword"] === $_POST["confirmPassword"]){
-                $hashPwd=password_hash($_POST["registerPassword"], PASSWORD_DEFAULT);
-                $newUser=new User($_POST['registerUsername'],$_POST['registerEmail'], $hashPwd);
+            if($post["registerPassword"] === $post["confirmPassword"]){
+                $hashPwd=password_hash($post["registerPassword"], PASSWORD_DEFAULT);
+                $newUser=new User($post['registerUsername'],$post['registerEmail'], $hashPwd);
                 $this->userManager->saveUser($newUser);
             }
             else{
                 echo "Les mots de passe sont différents !";
             }
-            // if(loadUser($_POST['registerEmail']===null)){
-            //     echo "Email déjà utilisé";
-            // }
         }   
         
-        else if(isset($_POST['registerUsername']) && empty($_POST['registerUsername'])){
+        else if(isset($post['registerUsername']) && empty($post['registerUsername'])){
             echo "Veuillez saisir un Pseudo";
         }
-        else if(isset($_POST['registerEmail']) && empty($_POST['registerEmail'])){
+        else if(isset($post['registerEmail']) && empty($post['registerEmail'])){
             echo "Veuillez saisir un Email";
         }
-        else if(isset($_POST['registerPassword']) && empty($_POST['registerPassword'])){
+        else if(isset($post['registerPassword']) && empty($post['registerPassword'])){
             echo "Veuillez saisir un mot de passe";
         }
-        else if(isset($_POST['confirmPassword']) && empty($_POST['confirmPassword'])){
+        else if(isset($post['confirmPassword']) && empty($post['confirmPassword'])){
             echo "Veuillez confirmer votre mot de passe";
         }
-        // $users=$this->manager->saveUser($newUser);
     }
 
     private function login(array $post)
