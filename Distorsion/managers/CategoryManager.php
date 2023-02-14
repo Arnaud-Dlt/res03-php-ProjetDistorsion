@@ -16,6 +16,7 @@ class CategoryManager extends AbstractManager
         foreach($getAllCategories as $category)
         {
             $newCategory=new Category($category["name"],$category["description"]);
+            $newCategory->setId($category["id"]);
             array_push($tabCategories, $newCategory);
         }
         return $tabCategories;
