@@ -39,10 +39,7 @@ class UserController extends AbstractController{
         }
     }
 
-    public function createCatDisplay()
-    {
-        $this->render("create-category", []);
-    }
+    
     
     public function createRoomDisplay()
     {

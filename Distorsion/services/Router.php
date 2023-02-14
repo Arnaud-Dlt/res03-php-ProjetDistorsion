@@ -2,22 +2,22 @@
 
 require "controllers/UserController.php";
 // require "controllers/MessageController.php";
-// require "controllers/CategoryController.php";
+require "controllers/CategoryController.php";
 // require "controllers/RoomController.php";
 
 class Router {
     
     private UserController $userControl;
-    // private MessageController $MessageController;
-    // private CategoryController $CategoryController;
-    // private RoomController $RoomController;
+    // private MessageController $messageController;
+    private CategoryController $categoryController;
+    // private RoomController $roomController;
 
     public function __construct()
     {
         $this->userController = new UserController();
-        // $this->MessageController = new MessageController();
-        // $this->CategoryController = new CategoryController();
-        // $this->RoomController = new RoomController();
+        // $this->messageController = new MessageController();
+        $this->categoryController = new CategoryController();
+        // $this->roomController = new RoomController();
     }
     
     function checkRoute(string $route) : void 
@@ -35,7 +35,7 @@ class Router {
             $this->userController->welcomeDisplay();
         }
         else if ($route === "créer-categorie"){
-            $this->userController->createCatDisplay();
+            $this->categoryController->createCatDisplay($_POST);
         }
         else if ($route === "créer-salon"){
             $this->userController->createRoomDisplay();

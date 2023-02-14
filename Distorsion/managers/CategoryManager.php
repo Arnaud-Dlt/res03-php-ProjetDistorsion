@@ -1,6 +1,6 @@
 <?php
 
-require "managers/AbstractManager.php";
+// require "managers/AbstractManager.php";
 require "models/Category.php";
 
 class CategoryManager extends AbstractManager
@@ -25,7 +25,7 @@ class CategoryManager extends AbstractManager
         return $tabCategories;
     }
     
-    public function saveCategory(Category $category) : ? Category
+    public function saveCategory(Category $category) :void
     {
         $query = $this->db->prepare('INSERT INTO categories VALUES (null, :value1, :value2)');
         $parameters = [
@@ -33,8 +33,6 @@ class CategoryManager extends AbstractManager
         'value2' => $category->getDescription()
         ];
         $query->execute($parameters);
-
-        return $this->loadCategory($category->getName());
         
     }
 }
