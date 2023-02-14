@@ -30,12 +30,10 @@ class UserController extends AbstractController{
     public function loginDisplay(array $post)
     {
         if (isset($post["loginEmail"])){
-            echo "Je suis dans le if<br>";
             $this->login($post);
             $this->render("welcome", []);
         }
         else{
-            echo "Je suis dans le else<br>";
             $this->render("login", []);
         }
     }
@@ -87,10 +85,8 @@ class UserController extends AbstractController{
             $logEmail=$post["loginEmail"];
             $pwd=$post["loginPassword"];
             $userToConnect=$this->userManager->loadUser($logEmail);
-            var_dump($userToConnect);
             if(password_verify($pwd, $userToConnect->getPassword()))
             {
-                echo "Bienvenue";
                 $_GET["route"]="bienvenue";
                 // $_SESSION["connectedUser"] = true;
                 // $_SESSION["userId"] = $userToConnect->getId();
