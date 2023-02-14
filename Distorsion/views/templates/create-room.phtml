@@ -17,7 +17,7 @@
         <select name="categoryId">
             <option>-Choisissez la catégorie-</option>
             <?php 
-            foreach($tabCategories as $category){ ?>
+            foreach($data as $category){ ?>
             <option><?php $category->getId()." ".$category->getName()?></option>
             <?php } ?>
         </select>

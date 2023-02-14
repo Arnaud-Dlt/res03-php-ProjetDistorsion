@@ -1,13 +1,16 @@
 <?php
 // require 'controllers/AbstractController.php';
 require 'managers/RoomManager.php';
+// require 'managers/CategoryManager.php';
 
 class RoomController extends AbstractController{
     private RoomManager $roomManager;
+    private CategoryManager $categoryManager;
     
     public function __construct()
     {
         $this->roomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $this->categoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
     }
     
     public function createRoomDisplay(array $post)
@@ -16,7 +19,8 @@ class RoomController extends AbstractController{
             $this->createRoom($post);
             $this->render("welcome", ["room creer"]);
         }
-        $this->render("create-room", []);
+        $allCategories=$this->categoryManager->loadAllCategory();
+        $this->render("create-room", $allCategories);
     }
     
     public function createRoom($post)
