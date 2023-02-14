@@ -18,10 +18,9 @@ class UserController extends AbstractController{
     
     public function registerDisplay(array $post)
     {
-        echo "coucou";
         if (isset($post["registerUsername"])){
             $this->register($post);
-            $this->render("welcome", []);
+            $this->render("welcome", ["Bonjour nouvel utilisateur"]);
         }
         else{
             $this->render("register", []);
@@ -32,7 +31,7 @@ class UserController extends AbstractController{
     {
         if (isset($post["loginEmail"])){
             $this->login($post);
-            $this->render("welcome", []);
+            $this->render("welcome", ["Ravie de te revoir mon poulet !"]);
         }
         else{
             $this->render("login", []);
