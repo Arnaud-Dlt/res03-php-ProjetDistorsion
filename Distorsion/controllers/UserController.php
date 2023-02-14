@@ -39,6 +39,16 @@ class UserController extends AbstractController{
         }
     }
 
+    public function createCatDisplay()
+    {
+        $this->render("create-categories", []);
+    }
+    
+    public function createRoomDisplay()
+    {
+        $this->render("create-rooms", []);
+    }
+
     private function register(){
         if(isset($post["registerUsername"]) && !empty($post["registerUsername"])
         && isset($post["registerEmail"]) && !empty($post["registerEmail"])
