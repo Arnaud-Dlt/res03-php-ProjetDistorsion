@@ -6,13 +6,10 @@ require "models/User.php";
 class UserManager extends AbstractManager{
     
     function loadUser(string $email): ? User{ 
-        echo "Adresse email dans la fontion loadUser est : ".$email;
         $query= $this->db->prepare("SELECT * FROM users WHERE email=:value");
         $parameters=['value' => $email];
-        var_dump($parameters);
         $query->execute($parameters);
         $loadedUser = $query->fetch(PDO::FETCH_ASSOC);
-        var_dump($loadedUser);
         // if($loadedUser===false){
         //     return null;
         // }
