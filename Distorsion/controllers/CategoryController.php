@@ -35,7 +35,6 @@ class CategoryController extends AbstractController{
             echo "Veuillez saisir une description";
         }
     }
-    
 }
 
 
