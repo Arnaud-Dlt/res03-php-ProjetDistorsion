@@ -18,7 +18,7 @@
             <option>-Choisissez la catégorie-</option>
             <?php 
             foreach($data as $category){ ?>
-            <option><?php $category->getId()." ".$category->getName()?></option>
+            <option value=<?= $category->getId()?>><?= $category->getName()?></option>
             <?php } ?>
         </select>
         </fieldset>
