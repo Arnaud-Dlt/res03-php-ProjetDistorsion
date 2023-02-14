@@ -14,7 +14,7 @@ class RoomController extends AbstractController{
     {
         if(isset($post['roomName'])){
             $this->createRoom($post);
-            echo "room creer";
+            $this->render("welcome", ["room creer"]);
         }
         $this->render("create-room", []);
     }

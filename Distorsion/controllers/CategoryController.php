@@ -14,7 +14,6 @@ class CategoryController extends AbstractController{
     {
         if(isset($post['catName'])){
             $this->createCategory($post);
-            echo "categorie creer";
             $this->render("welcome", ["categorie creer"]);
         }
         $this->render("create-category", []);
