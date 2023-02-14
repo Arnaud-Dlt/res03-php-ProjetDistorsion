@@ -41,12 +41,12 @@ class UserController extends AbstractController{
 
     public function createCatDisplay()
     {
-        $this->render("create-categories", []);
+        $this->render("create-category", []);
     }
     
     public function createRoomDisplay()
     {
-        $this->render("create-rooms", []);
+        $this->render("create-room", []);
     }
 
     private function register(){
