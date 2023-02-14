@@ -7,7 +7,7 @@ class Room {
     private string $description;
     private int $categoryId;
 
-    public function __construct(string $name, string $description, int $scategoryId)
+    public function __construct(string $name, string $description, int $categoryId)
     {
         $this->id = null;
         $this->name = $name;

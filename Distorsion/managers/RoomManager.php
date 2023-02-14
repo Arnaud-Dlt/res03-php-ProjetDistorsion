@@ -5,9 +5,9 @@ require "models/Room.php";
 
 class RoomManager extends AbstractManager{
     
-    function loadAllRoom($room): array 
+    function loadAllRoom(): array 
     { 
-        $query=$db->prepare("SELECT * FROM rooms");
+        $query=$this->db->prepare("SELECT * FROM rooms");
     
         $query->execute();
     

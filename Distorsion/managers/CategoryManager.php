@@ -6,9 +6,9 @@ require "models/Category.php";
 class CategoryManager extends AbstractManager
 {
     
-    function loadAllCategory($category): array 
+    function loadAllCategory(): array 
     { 
-        $query=$db->prepare("SELECT * FROM categories");
+        $query=$this->db->prepare("SELECT * FROM categories");
     
         $query->execute();
     
