@@ -29,9 +29,9 @@ class Router {
             $this->userController->registerDisplay();
         }
         else if ($route === "connexion"){
-            $this->userController->loginDisplay();
+            $this->userController->loginDisplay($_POST);
         }
-        else if ($route === "bienvenu"){
+        else if ($route === "bienvenue"){
             $this->userController->welcomeDisplay();
         }
         else{

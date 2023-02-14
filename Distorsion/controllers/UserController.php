@@ -27,15 +27,15 @@ class UserController extends AbstractController{
         }
     }
     
-    public function loginDisplay()
+    public function loginDisplay(array $post)
     {
-        if (isset($_POST["loginEmail"])){
-            echo "Je suis dans le if";
-            $this->login();
+        if (isset($post["loginEmail"])){
+            echo "Je suis dans le if<br>";
+            $this->login($post);
             $this->render("welcome", []);
         }
         else{
-            echo "Je suis dans le else";
+            echo "Je suis dans le else<br>";
             $this->render("login", []);
         }
     }
@@ -79,18 +79,19 @@ class UserController extends AbstractController{
         // $users=$this->manager->saveUser($newUser);
     }
 
-    function login()
+    private function login(array $post)
     {
-        if(isset($_POST['loginEmail'])&& !empty($_POST["loginEmail"]) && isset($_POST['loginPassword']) && !empty($_POST["loginPassword"]))
+        
+        if(isset($post['loginEmail'])&& !empty($post["loginEmail"]) && isset($post['loginPassword']) && !empty($post["loginPassword"]))
         {
-            $logEmail=$_POST["loginEmail"];
-            $pwd=$_POST["loginPassword"];
+            $logEmail=$post["loginEmail"];
+            $pwd=$post["loginPassword"];
             $userToConnect=$this->userManager->loadUser($logEmail);
             var_dump($userToConnect);
             if(password_verify($pwd, $userToConnect->getPassword()))
             {
                 echo "Bienvenue";
-                $_GET["route"]="admin-posts";
+                $_GET["route"]="bienvenue";
                 // $_SESSION["connectedUser"] = true;
                 // $_SESSION["userId"] = $userToConnect->getId();
             }
