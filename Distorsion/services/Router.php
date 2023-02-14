@@ -34,10 +34,10 @@ class Router {
         else if ($route === "bienvenue"){
             $this->userController->welcomeDisplay();
         }
-        else if ($route === "create-categories"){
+        else if ($route === "créer-categorie"){
             $this->userController->createCatDisplay();
         }
-        else if ($route === "create-rooms"){
+        else if ($route === "créer-salon"){
             $this->userController->createRoomDisplay();
         }
         else{
