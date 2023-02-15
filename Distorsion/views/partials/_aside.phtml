@@ -1,13 +1,16 @@
 <nav>
-    <?php foreach ($data as $category){ ?>
-    <h2><?php echo $category->getName(); ?></h2>
+    <?php foreach ($data as $key=>$values){ ?>
+    <h2><?php echo $key; ?></h2>
+        <?php foreach ($values as $room){ ?>
+        <h3><?php echo $room; ?></h3>
+
 
     
         
     
     
     
-    <?php } ?>
+    <?php }} ?>
 
 
 
