@@ -15,13 +15,16 @@ class UserController extends AbstractController{
     public function indexDisplay()
     {   
         $_SESSION["message"] = "Vous n'êtes pas connecté";
-        $this->render("home", []);
+        
+        $superTable = $this->SuperTableCreation();
+        $this->render("home", $superTable);
     }
     
     public function registerDisplay(array $post)
     {   
         if(empty($post)){
-            $this->render("register", []);
+            $superTable = $this->SuperTableCreation();
+            $this->render("register", $superTable);
         }
             
         else{
@@ -41,24 +44,8 @@ class UserController extends AbstractController{
                     $_SESSION["userId"] = $userToConnect->getId();
                     $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
-                    $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $newMessageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $allCategories=$newCategoryManager->loadAllCategory();
-                    $allRooms=$newRoomManager->loadAllRoom();
-                    $allMessages=$newMessageManager->loadAllMessage();
-
-                    $catRoomTab=[];
-                    foreach($allCategories as $category){
-
-                        $catRoomTab[$category->getName()]=[];
-                        foreach ($allRooms as $room){
-                            if ($room->getCategoryId()===$category->getId()){
-                                $catRoomTab[$category->getName()][] = $room->getName();
-                            }
-                        }
-                    }
-                    $this->render("welcome", $catRoomTab);
+                    $superTable = $this->SuperTableCreation();
+                    $this->render("welcome", $superTable);
                 }
                 else{
                     echo "Les mots de passe sont différents !";
@@ -82,7 +69,8 @@ class UserController extends AbstractController{
     public function loginDisplay(array $post)
     {
         if(empty($post)){
-            $this->render("login", []);
+            $superTable = $this->SuperTableCreation();
+            $this->render("login", $superTable);
         }
         else{
             if(isset($post['loginEmail'])&& !empty($post["loginEmail"]) && isset($post['loginPassword']) && !empty($post["loginPassword"])){
@@ -95,36 +83,8 @@ class UserController extends AbstractController{
                     $_SESSION["userId"] = $userToConnect->getId();
                     $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
-                    $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $newMessageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
-                    $allCategories=$newCategoryManager->loadAllCategory();
-                    $allRooms=$newRoomManager->loadAllRoom();
-                    $allMessages=$newMessageManager->loadAllMessage();
-
-                    $catRoomTab=[];
-                    foreach($allCategories as $category){
-                        $catRoomTab[$category->getName()]=[];
-                        foreach ($allRooms as $room){
-                            if ($room->getCategoryId()===$category->getId()){
-                                $catRoomTab[$category->getName()][] = $room->getName();
-                            }
-                        }
-                    }
-                    var_dump($catRoomTab);
-                    
-                    $roomMessTab=[];
-                    foreach($allRooms as $room){
-                        $roomMessTab[$room->getName()]=[];
-                        foreach ($allMessages as $message){
-                            if ($message->getRoomId()===$room->getId()){
-                                $roomMessTab[$room->getName()][] = $message->getContent();
-                            }
-                        }
-                    }
-                    var_dump($roomMessTab);
-
-                    $this->render("welcome", [$catRoomTab, $roomMessTab]);
+                    $superTable = $this->SuperTableCreation();
+                    $this->render("welcome", $superTable);
                 }
                 else{
                     echo "Identifiants inconnus";
@@ -138,8 +98,45 @@ class UserController extends AbstractController{
 
     public function createRoomDisplay()
     {
-        $this->render("create-room", []);
+        $superTable = $this->SuperTableCreation();
+        $this->render("create-room", $superTable);
     }
+    
+    public function SuperTableCreation(){
+
+        $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $newMessageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $allCategories=$newCategoryManager->loadAllCategory();
+        $allRooms=$newRoomManager->loadAllRoom();
+        $allMessages=$newMessageManager->loadAllMessage();
+
+        $catRoomTab=[];
+        foreach($allCategories as $category){
+            $catRoomTab[$category->getName()]=[];
+            foreach ($allRooms as $room){
+                if ($room->getCategoryId()===$category->getId()){
+                    $catRoomTab[$category->getName()][] = $room->getName();
+                }
+            }
+        }
+
+        $roomMessTab=[];
+        foreach($allRooms as $room){
+            $roomMessTab[$room->getName()]=[];
+            foreach ($allMessages as $message){
+                if ($message->getRoomId()===$room->getId()){
+                    $roomMessTab[$room->getName()][] = $message->getContent();
+                }
+            }
+        }
+
+        $superTable = [$catRoomTab, $roomMessTab];
+
+        return $superTable;
+    }
+    
+    
 }
 
 
