@@ -83,9 +83,7 @@ class UserController extends AbstractController{
                     $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
                     $allRooms=$newRoomManager->loadAllRoom();
-                    var_dump($allCategories);
-                    var_dump($allRooms);
-                    
+
                     $catRoomTab=[];
                     foreach($allCategories as $category){
 
@@ -96,8 +94,6 @@ class UserController extends AbstractController{
                             }
                         }
                     }
-                    var_dump($catRoomTab);
-
                     $this->render("welcome", $catRoomTab);
                 }
                 else{
