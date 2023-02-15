@@ -12,7 +12,8 @@ class UserController extends AbstractController{
 
 
     public function indexDisplay()
-    {
+    {   
+        $_SESSION["message"] = "Vous n'êtes pas connecté";
         $this->render("home", []);
     }
     
@@ -37,7 +38,7 @@ class UserController extends AbstractController{
 
                     $_SESSION["connectedUser"] = true;
                     $_SESSION["userId"] = $userToConnect->getId();
-                    $_SESSION["username"] = $userToConnect->getUsername();
+                    $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
@@ -76,7 +77,7 @@ class UserController extends AbstractController{
 
                     $_SESSION["connectedUser"] = true;
                     $_SESSION["userId"] = $userToConnect->getId();
-                    $_SESSION["username"] = $userToConnect->getUsername();
+                    $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
