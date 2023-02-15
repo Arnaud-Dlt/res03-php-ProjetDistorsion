@@ -107,5 +107,30 @@ main > section {
   background-color: lightgrey;
   padding: 20px;
 }
+main #registerForm {
+  box-shadow: 2px 2px 5px #000;
+  height: 100%;
+  display: grid;
+  grid-templates-columns: 1fr 1fr;
+}
+main #registerForm section:first-of-type {
+  grid-column: 1/2;
+  margin-left: 10vw;
+}
+main #registerForm section:first-of-type h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2vh;
+}
+main #registerForm section:first-of-type fieldset {
+  margin-bottom: 1vh;
+}
+main #registerForm section:first-of-type #registerButton {
+  margin-top: 5vh;
+  width: 15vw;
+}
+main #registerForm section:nth-of-type(2) {
+  grid-column: 2/3;
+  background-image: url("./assets/images/logoDistorsion.png");
+}
 
 /*# sourceMappingURL=style.css.map */

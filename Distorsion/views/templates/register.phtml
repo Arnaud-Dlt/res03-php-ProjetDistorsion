@@ -1,27 +1,41 @@
-<section>
+<section id="registerForm">
+    <section>
     <h2>S'inscrire</h2>
     <form action="index.php?route=créer-compte" method="POST">
 
         <fieldset>
         <label>Nom d'utilisateur : </label>
+        </fieldset>
+        <fieldset>
         <input type="text" name="registerUsername">
         </fieldset>
 
         <fieldset>
         <label>Email : </label>
+        </fieldset>
+        
+        <fieldset>
         <input type="email" name="registerEmail">
         </fieldset>
         
         <fieldset>
         <label>Mot de passe : </label>
+        </fieldset>
+        <fieldset>
         <input type="password" name="registerPassword">
         </fieldset>
         
         <fieldset>
         <label>Confirmer Mot de passe : </label>
+        </fieldset>
+        <fieldset>
         <input type="password" name="confirmPassword">
         </fieldset>
         
-        <input type="submit" name="register">
+        <input type="submit" name="register" value="Créer un compte !" id="registerButton">
     </form>
+    </section>
+    <section>
+        <h2>Distorsion</h2>
+    </section>
 </section>
