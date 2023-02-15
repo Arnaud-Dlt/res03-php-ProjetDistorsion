@@ -88,18 +88,17 @@ class UserController extends AbstractController{
                     
                     $catRoomTab=[];
                     foreach($allCategories as $category){
-                        array_push($catRoomTab, $category);
-                        foreach ($allRooms as $category=>$room){
+
+                        $catRoomTab[$category->getName()]=[];
+                        foreach ($allRooms as $room){
                             if ($room->getCategoryId()===$category->getId()){
-                                array_push($catRoomTab, $room);
+                                $catRoomTab[$category->getName()][] = $room->getName();
                             }
                         }
                     }
                     var_dump($catRoomTab);
 
-                    
-                    
-                    $this->render("welcome", $allCategories);
+                    $this->render("welcome", $catRoomTab);
                 }
                 else{
                     echo "Identifiants inconnus";
@@ -116,34 +115,6 @@ class UserController extends AbstractController{
         $this->render("create-room", []);
     }
 }
-
-
-// $catRoomTab=[
-//     'Cinéma' => ["Action", "Aventure", "Comédie"],
-//     'Jeux' => ["Stratégie", "Combat", "Course"],
-//     'Sport' => ["Pin-pong", "Tennis", "Foot"]
-//     ];
-
-
-
-// $allCategories=$newCategoryManager->loadAllCategory();
-// var_dump($allCategories);
-
-
-// foreach($categories as $category){
-//     $catRoomTab[] = $category;
-//     foreach ($rooms as $room){
-//         if ($room->getCategoryId()===$category->getId)
-//         $catRoomTab[$category][] = $room;
-//     }
-// }
-
-
-
-
-
-
-
 
 ?>
 
