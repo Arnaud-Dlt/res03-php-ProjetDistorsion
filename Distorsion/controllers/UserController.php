@@ -101,25 +101,30 @@ class UserController extends AbstractController{
                     $allCategories=$newCategoryManager->loadAllCategory();
                     $allRooms=$newRoomManager->loadAllRoom();
                     $allMessages=$newMessageManager->loadAllMessage();
-                    var_dump($allMessages);
-                    
-                    $catRoomMessTab=[];
-                    foreach($allCategories as $category){
-                        $catRoomMessTab[$category->getName()]=[];
 
+                    $catRoomTab=[];
+                    foreach($allCategories as $category){
+                        $catRoomTab[$category->getName()]=[];
                         foreach ($allRooms as $room){
                             if ($room->getCategoryId()===$category->getId()){
-                                $catRoomMessTab[$category->getName()][] = $room->getName();
-                                foreach ($allMessages as $message){
-                                    if ($message->getRoomId()===$room->getId()){
-                                        $catRoomMessTab[$category->getName()][$room->getName()][] = $message->getContent();
-                                    }
-                                }
+                                $catRoomTab[$category->getName()][] = $room->getName();
                             }
                         }
                     }
-                    var_dump($catRoomMessTab);
-                    $this->render("welcome", $catRoomMessTab);
+                    var_dump($catRoomTab);
+                    
+                    $roomMessTab=[];
+                    foreach($allRooms as $room){
+                        $roomMessTab[$room->getName()]=[];
+                        foreach ($allMessages as $message){
+                            if ($message->getRoomId()===$room->getId()){
+                                $roomMessTab[$room->getName()][] = $message->getContent();
+                            }
+                        }
+                    }
+                    var_dump($roomMessTab);
+
+                    $this->render("welcome", [$catRoomTab, $roomMessTab]);
                 }
                 else{
                     echo "Identifiants inconnus";
