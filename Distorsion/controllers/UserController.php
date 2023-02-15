@@ -33,6 +33,12 @@ class UserController extends AbstractController{
                     $newUser=new User($post['registerUsername'],$post['registerEmail'], $hashPwd);
                     $this->userManager->saveUser($newUser);
                     
+                    $userToConnect=$this->userManager->loadUser($post['registerEmail']);
+
+                    $_SESSION["connectedUser"] = true;
+                    $_SESSION["userId"] = $userToConnect->getId();
+                    $_SESSION["username"] = $userToConnect->getUsername();
+
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
                     $this->render("welcome", $allCategories);
@@ -67,9 +73,14 @@ class UserController extends AbstractController{
                 $pwd=$post["loginPassword"];
                 $userToConnect=$this->userManager->loadUser($logEmail);
                 if(password_verify($pwd, $userToConnect->getPassword())){
-                    $this->render("welcome", []);
-                    // $_SESSION["connectedUser"] = true;
-                    // $_SESSION["userId"] = $userToConnect->getId();
+
+                    $_SESSION["connectedUser"] = true;
+                    $_SESSION["userId"] = $userToConnect->getId();
+                    $_SESSION["username"] = $userToConnect->getUsername();
+
+                    $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+                    $allCategories=$newCategoryManager->loadAllCategory();
+                    $this->render("welcome", $allCategories);
                 }
                 else{
                     echo "Identifiants inconnus";

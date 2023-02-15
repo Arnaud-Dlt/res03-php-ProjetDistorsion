@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "services/Router.php";
 
 $newRouter = new Router();
