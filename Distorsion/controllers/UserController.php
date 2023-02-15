@@ -86,6 +86,7 @@ class UserController extends AbstractController{
 
                     $catRoomTab=[];
                     foreach($allCategories as $category){
+
                         $catRoomTab[$category->getName()]=[];
                         foreach ($allRooms as $room){
                             if ($room->getCategoryId()===$category->getId()){
