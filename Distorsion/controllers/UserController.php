@@ -1,6 +1,7 @@
 <?php
 require 'controllers/AbstractController.php';
 require 'managers/UserManager.php';
+require 'managers/MessageManager.php';
 
 class UserController extends AbstractController{
     private UserManager $userManager;
@@ -41,8 +42,23 @@ class UserController extends AbstractController{
                     $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+                    $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+                    $newMessageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
-                    $this->render("welcome", $allCategories);
+                    $allRooms=$newRoomManager->loadAllRoom();
+                    $allMessages=$newMessageManager->loadAllMessage();
+
+                    $catRoomTab=[];
+                    foreach($allCategories as $category){
+
+                        $catRoomTab[$category->getName()]=[];
+                        foreach ($allRooms as $room){
+                            if ($room->getCategoryId()===$category->getId()){
+                                $catRoomTab[$category->getName()][] = $room->getName();
+                            }
+                        }
+                    }
+                    $this->render("welcome", $catRoomTab);
                 }
                 else{
                     echo "Les mots de passe sont différents !";
@@ -81,20 +97,29 @@ class UserController extends AbstractController{
 
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+                    $newMessageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
                     $allRooms=$newRoomManager->loadAllRoom();
-
-                    $catRoomTab=[];
+                    $allMessages=$newMessageManager->loadAllMessage();
+                    var_dump($allMessages);
+                    
+                    $catRoomMessTab=[];
                     foreach($allCategories as $category){
+                        $catRoomMessTab[$category->getName()]=[];
 
-                        $catRoomTab[$category->getName()]=[];
                         foreach ($allRooms as $room){
                             if ($room->getCategoryId()===$category->getId()){
-                                $catRoomTab[$category->getName()][] = $room->getName();
+                                $catRoomMessTab[$category->getName()][] = $room->getName();
+                                foreach ($allMessages as $message){
+                                    if ($message->getRoomId()===$room->getId()){
+                                        $catRoomMessTab[$category->getName()][$room->getName()][] = $message->getContent();
+                                    }
+                                }
                             }
                         }
                     }
-                    $this->render("welcome", $catRoomTab);
+                    var_dump($catRoomMessTab);
+                    $this->render("welcome", $catRoomMessTab);
                 }
                 else{
                     echo "Identifiants inconnus";
@@ -112,6 +137,8 @@ class UserController extends AbstractController{
     }
     
 }
+
 ?>
+
 
 

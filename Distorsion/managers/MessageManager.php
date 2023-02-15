@@ -1,24 +1,19 @@
 <?php
 
-require "managers/AbstractManager.php";
 require "models/Message.php";
 
 class MessageManager extends AbstractManager{
     
-    function loadAllMessage($message): array 
+    function loadAllMessage(): array 
     { 
-        $query=$db->prepare("SELECT * FROM messages");
-    
+        $query=$this->db->prepare("SELECT * FROM messages");
         $query->execute();
-    
         $getAllMessage = $query->fetchAll(PDO::FETCH_ASSOC);
     
         $tabmessage=[];
-        
         foreach($getAllMessage as $message)
         {
-            $newMessage=new Message($message["content"]);
-            
+            $newMessage=new Message($message["content"], $message["room_id"], $message["user_id"]);
             array_push($tabmessage, $newMessage);
         }
         return $tabmessage;
