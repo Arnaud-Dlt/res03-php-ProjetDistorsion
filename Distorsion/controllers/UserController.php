@@ -88,10 +88,11 @@ class UserController extends AbstractController{
                     
                     $catRoomTab=[];
                     foreach($allCategories as $category){
-                        $catRoomTab[] = $category;
-                        foreach ($allRooms as $room){
-                            if ($room->getCategoryId()===$category->getId())
-                                $catRoomTab[$category][] = $room;
+                        array_push($catRoomTab, $category);
+                        foreach ($allRooms as $category=>$room){
+                            if ($room->getCategoryId()===$category->getId()){
+                                array_push($catRoomTab, $room);
+                            }
                         }
                     }
                     var_dump($catRoomTab);
