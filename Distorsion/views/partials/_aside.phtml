@@ -1,8 +1,8 @@
 <nav>
-    <?php foreach ($data as $key=>$values){ ?>
+    <?php foreach ($data[0] as $key=>$values){ ?>
     <h2><?php echo $key; ?></h2>
-        <?php foreach ($values as $room){ ?>
-        <h3><a href="index.php?route=bienvenue"><?php echo $room; ?></a></h3>
+        <?php foreach ($values as $key=>$values){ ?>
+        <h3><a href="index.php?route=bienvenue"><?php echo $values; ?></a></h3>
 
 
     
