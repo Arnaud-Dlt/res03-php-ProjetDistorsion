@@ -80,7 +80,24 @@ class UserController extends AbstractController{
                     $_SESSION["message"] = "Bienvenue ".$userToConnect->getUsername();
 
                     $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+                    $newRoomManager = new RoomManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
                     $allCategories=$newCategoryManager->loadAllCategory();
+                    $allRooms=$newRoomManager->loadAllRoom();
+                    var_dump($allCategories);
+                    var_dump($allRooms);
+                    
+                    $catRoomTab=[];
+                    foreach($allCategories as $category){
+                        $catRoomTab[] = $category;
+                        foreach ($allRooms as $room){
+                            if ($room->getCategoryId()===$category->getId())
+                                $catRoomTab[$category][] = $room;
+                        }
+                    }
+                    var_dump($catRoomTab);
+
+                    
+                    
                     $this->render("welcome", $allCategories);
                 }
                 else{
@@ -100,19 +117,23 @@ class UserController extends AbstractController{
 }
 
 
+// $catRoomTab=[
+//     'Cinéma' => ["Action", "Aventure", "Comédie"],
+//     'Jeux' => ["Stratégie", "Combat", "Course"],
+//     'Sport' => ["Pin-pong", "Tennis", "Foot"]
+//     ];
 
 
-// $tabCatRoom=[];
+
+// $allCategories=$newCategoryManager->loadAllCategory();
+// var_dump($allCategories);
+
 
 // foreach($categories as $category){
-    
-//     $id=$category->getId();
-    
-//     foreach($rooms as $room){
-        
-//         if($id === $room->getId()){
-//             array_push($tab, $room);
-//         }
+//     $catRoomTab[] = $category;
+//     foreach ($rooms as $room){
+//         if ($room->getCategoryId()===$category->getId)
+//         $catRoomTab[$category][] = $room;
 //     }
 // }
 

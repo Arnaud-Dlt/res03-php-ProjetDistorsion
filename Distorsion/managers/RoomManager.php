@@ -8,17 +8,14 @@ class RoomManager extends AbstractManager{
     function loadAllRoom(): array 
     { 
         $query=$this->db->prepare("SELECT * FROM rooms");
-    
         $query->execute();
-    
         $getAllRooms = $query->fetchAll(PDO::FETCH_ASSOC);
-    
+
         $tabRooms=[];
-        
         foreach($getAllRooms as $room)
         {
-            $newRoom=new Room($room["name"],$room["description"]);
-            
+            $newRoom=new Room($room["name"], $room["description"], $room["category_id"]);
+            $newRoom->setId($room["id"]);
             array_push($tabRooms, $newRoom);
         }
         return $tabRooms;
