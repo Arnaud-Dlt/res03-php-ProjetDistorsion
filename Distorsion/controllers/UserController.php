@@ -34,15 +34,12 @@ class UserController extends AbstractController{
     {
         if (isset($post["loginEmail"])){
             $this->login($post);
-            $this->render("welcome", ["Ravie de te revoir mon poulet !"]);
         }
         else{
             $this->render("login", []);
         }
     }
 
-    
-    
     public function createRoomDisplay()
     {
         $this->render("create-room", []);
@@ -88,7 +85,7 @@ class UserController extends AbstractController{
             $userToConnect=$this->userManager->loadUser($logEmail);
             if(password_verify($pwd, $userToConnect->getPassword()))
             {
-                $_GET["route"]="bienvenue";
+                $this->render("welcome", []);
                 // $_SESSION["connectedUser"] = true;
                 // $_SESSION["userId"] = $userToConnect->getId();
             }
