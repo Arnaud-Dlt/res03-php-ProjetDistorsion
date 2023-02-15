@@ -7,26 +7,30 @@ class MessageController extends AbstractController{
     
     public function __construct()
     {
-        $this->manager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+        $this->messageManager = new MessageManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
     }
     
     
-    public function index()
+    public function createMessageDisplay(array $post)
     {
-        $messages=$this->manager->getAllMessage();
-        $this->render("index", ["messages"=>$messages]);
+        if(isset($post['content'])){
+            $this->createMessage($post);
+        }
+        $allMessages=$this->messageManager->loadAllMessage();
+        $this->render("", $allMessages);
     }
     
     public function createMessage(array $message)
     {
-        $newMessage = new Message($message['content']);
-        $messages=$this->manager->insertMessage($newMessage);
-        $this->render("create", ["messages"=>$messages]);
-    }
-    
-    public function editMessage(array $message)
-    {
+        if(isset($post[""]) && !empty($post[""])){
+            
+            $newMessage=new Message($post['content']);
+            $this->messageManager->saveMessage($newMessage);
+        }   
         
+        else {
+            
+        }
     }
 }
 

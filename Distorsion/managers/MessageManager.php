@@ -31,4 +31,5 @@ class MessageManager extends AbstractManager{
 
         return $this->loadMessage($message->getContent());
     }
+}
 ?>
