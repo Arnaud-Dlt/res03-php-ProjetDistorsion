@@ -1,5 +1,4 @@
 <?php
-// require 'controllers/AbstractController.php';
 require 'managers/CategoryManager.php';
 
 class CategoryController extends AbstractController{
