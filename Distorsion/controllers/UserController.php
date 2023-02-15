@@ -98,4 +98,29 @@ class UserController extends AbstractController{
 }
 
 
+
+
+// $tabCatRoom=[];
+
+// foreach($categories as $category){
+    
+//     $id=$category->getId();
+    
+//     foreach($rooms as $room){
+        
+//         if($id === $room->getId()){
+//             array_push($tab, $room);
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
 ?>
+
+
