@@ -20,7 +20,10 @@ class UserController extends AbstractController{
     {
         if (isset($post["registerUsername"])){
             $this->register($post);
-            $this->render("welcome", ["Bonjour nouvel utilisateur"]);
+            
+            $newCategoryManager = new CategoryManager("arnauddeletre_Distorsion", "3306", "db.3wa.io","arnauddeletre","900979afbcfa4468bcb42cce8d75b844");
+            $allCategories=$newCategoryManager->loadAllCategory();
+            $this->render("welcome", $allCategories);
         }
         else{
             $this->render("register", []);
@@ -95,6 +98,7 @@ class UserController extends AbstractController{
             }
         }
     }
+
 }
 
 
