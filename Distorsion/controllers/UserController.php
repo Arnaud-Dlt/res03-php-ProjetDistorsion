@@ -136,9 +136,7 @@ class UserController extends AbstractController{
         return $superTable;
     }
     
-    
 }
-
 
 ?>
 
