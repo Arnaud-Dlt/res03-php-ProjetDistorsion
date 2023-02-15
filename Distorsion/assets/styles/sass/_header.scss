@@ -1,14 +1,15 @@
 header{
     height: 10vh;
     width: 100vw;
-    background-color: blue;
+    background-color:#242423;
+    color:#F5CB5C;
     > ul{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         > li{
             > a{
-            color: black;
+            color:#F5CB5C;
             text-decoration: none;
             }
         }
